@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class TranslucentTextLabel extends StatelessWidget {
 
   final String title;
+  final Color? titleColor;
   final Size? size;
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
@@ -13,7 +14,8 @@ class TranslucentTextLabel extends StatelessWidget {
     this.margin,
     this.padding,
     this.size,
-    this.decoration
+    this.decoration,
+    this.titleColor
   }) : super(key: key);
 
   @override
@@ -30,7 +32,7 @@ class TranslucentTextLabel extends StatelessWidget {
         style: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.w600,
-          color: Colors.white.withOpacity(.8),
+          color: titleColor ?? Colors.white.withOpacity(.8),
         ),
       ),
     );

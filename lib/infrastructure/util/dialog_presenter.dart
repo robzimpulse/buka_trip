@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Dialog {
+class DialogPresenter {
   static Future<void> alert(BuildContext context,{
     required String title,
     required String content,
@@ -9,7 +9,7 @@ class Dialog {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(title),
+          title: Center(child: Text(title)),
           content: SingleChildScrollView(
             child: Text(content)
           ),

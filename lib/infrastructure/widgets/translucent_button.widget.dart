@@ -11,6 +11,7 @@ class TranslucentButton extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final EdgeInsetsGeometry? padding;
   final Color? color;
+  final bool disabled;
 
   const TranslucentButton({
     Key? key,
@@ -19,7 +20,8 @@ class TranslucentButton extends StatelessWidget {
     this.size,
     this.margin,
     this.padding,
-    this.color
+    this.color,
+    this.disabled = false
   }) : super(key: key);
 
   void _onTap() {
@@ -36,9 +38,10 @@ class TranslucentButton extends StatelessWidget {
       width: size?.width,
       height: size?.height,
       child: InkWell(
+        splashFactory: disabled ? NoSplash.splashFactory : null,
         splashColor: Colors.grey,
         highlightColor: Colors.transparent,
-        onTap: _onTap,
+        onTap: disabled ? null : _onTap,
         child: TranslucentTextLabel(title)
       ),
     );

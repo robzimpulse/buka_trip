@@ -58,6 +58,7 @@ class ForgetPasswordForm extends StatelessWidget {
           ),
           TranslucentButton(
             size: Size(size.width * 0.8, 44),
+            disabled: onTapSubmit == null,
             title: "Submit",
             onTap: onTapSubmit,
             margin: EdgeInsets.only(

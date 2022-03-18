@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:buka_trip/infrastructure/index.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/index.dart';
 
@@ -14,6 +16,9 @@ class _AuthScreen extends State<AuthScreen> {
   bool _isRegisterScreen = false;
   bool _isForgetPasswordScreen = false;
   bool _isLoading = false;
+  bool _isLoginButtonDisabled = false;
+  bool _isRegisterButtonDisabled = false;
+  bool _isForgetPasswordButtonDisabled = false;
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -22,12 +27,34 @@ class _AuthScreen extends State<AuthScreen> {
 
   @override
   void initState() {
+    usernameController.addListener(_updateButtonDisability);
+    emailController.addListener(_updateButtonDisability);
+    passwordController.addListener(_updateButtonDisability);
+    passwordConfirmController.addListener(_updateButtonDisability);
     super.initState();
   }
 
   @override
   void dispose() {
+    usernameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    passwordConfirmController.dispose();
     super.dispose();
+  }
+
+  void _updateButtonDisability() {
+    setState(() {
+      _isLoginButtonDisabled = emailController.text.isEmpty == true ||
+          passwordController.text.isEmpty == true;
+
+      _isRegisterButtonDisabled = usernameController.text.isEmpty == true ||
+          emailController.text.isEmpty == true ||
+          passwordController.text.isEmpty == true ||
+          passwordController.text != passwordConfirmController.text;
+
+      _isForgetPasswordButtonDisabled = emailController.text.isEmpty == true;
+    });
   }
 
   void onTapRegister() {
@@ -51,19 +78,42 @@ class _AuthScreen extends State<AuthScreen> {
     });
   }
 
-  void onTapSubmitRegisterForm() {
-    setState(() { _isLoading = true; });
-    Log.debug("register with ${emailController.text} | ${passwordController.text}");
+  Future<void> onTapSubmitRegister() async {
+    try {
+      setState(() { _isLoading = true; });
+      String username = usernameController.text;
+      String email = emailController.text;
+      String password = passwordController.text;
+      String passwordConfirm = passwordConfirmController.text;
+      final auth = Provider.of<AuthBase>(context, listen: false);
+      await auth.register(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      DialogPresenter.alert(context, title: "Error", content: "${e.message}");
+    } catch (e) {
+      Log.debug("onTapSubmitRegisterForm ${e.toString()}");
+    } finally {
+      setState(() { _isLoading = false; });
+    }
   }
 
-  void onTapSubmitLoginForm() {
-    setState(() { _isLoading = true; });
-    Log.debug("login with ${emailController.text} | ${passwordController.text}");
+  Future<void> onTapSubmitLogin() async {
+    try {
+      setState(() { _isLoading = true; });
+      String email = emailController.text;
+      String password = passwordConfirmController.text;
+      final auth = Provider.of<AuthBase>(context, listen: false);
+      await auth.login(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      DialogPresenter.alert(context, title: "Error", content: "${e.message}");
+    } catch (e) {
+      Log.debug("onTapSubmitLoginForm ${e.toString()}");
+    } finally {
+      setState(() { _isLoading = false; });
+    }
   }
 
-  void onTapSubmitForgetPasswordForm() {
-    setState(() { _isLoading = true; });
-    Log.debug("forget password with ${emailController.text}");
+  Future<void> onTapSubmitForgetPassword() async {
+
   }
 
   Widget form(Size size) {
@@ -76,7 +126,7 @@ class _AuthScreen extends State<AuthScreen> {
         size: size,
         onTapLogin: onTapLogin,
         onTapForgetPassword: onTapForgetPassword,
-        onTapSubmit: onTapSubmitRegisterForm,
+        onTapSubmit: _isRegisterButtonDisabled ? null : onTapSubmitRegister,
       );
     }
 
@@ -86,7 +136,7 @@ class _AuthScreen extends State<AuthScreen> {
         size: size,
         onTapLogin: onTapLogin,
         onTapRegister: onTapRegister,
-        onTapSubmit: onTapSubmitForgetPasswordForm,
+        onTapSubmit: _isForgetPasswordButtonDisabled ? null : onTapSubmitForgetPassword,
       );
     }
 
@@ -96,7 +146,7 @@ class _AuthScreen extends State<AuthScreen> {
       size: size,
       onTapRegister: onTapRegister,
       onTapForgetPassword: onTapForgetPassword,
-      onTapSubmit: onTapSubmitLoginForm,
+      onTapSubmit: _isLoginButtonDisabled ? null : onTapSubmitLogin,
     );
   }
 

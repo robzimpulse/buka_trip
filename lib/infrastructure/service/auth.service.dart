@@ -2,15 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthBase {
   User? get currentUser;
-  Future <User?> signInAnonymously();
-  Future <void> signOut();
+  Future <void> logout();
   Stream <User?> authStateChanges();
-  Future <User?> signInWithEmailAndPassword ({
-    required String email, required String password
-  });
-  Future <User?> createUserWithEmailAndPassword ({
-    required String email, required String password
-  });
+  Future <User?> login ({required String email, required String password});
+  Future <User?> register ({required String email, required String password});
 }
 
 class AuthService implements AuthBase {
@@ -24,7 +19,7 @@ class AuthService implements AuthBase {
   User? get currentUser => _firebaseAuth.currentUser;
 
   @override
-  Future<User?> createUserWithEmailAndPassword({
+  Future<User?> register({
     required String email, required String password
   }) async {
     final userCredential = await _firebaseAuth
@@ -33,15 +28,7 @@ class AuthService implements AuthBase {
   }
 
   @override
-  Future<User?> signInAnonymously() async {
-    final userCredential = await _firebaseAuth.signInAnonymously();
-    return userCredential.user;
-  }
-
-  @override
-  Future<User?> signInWithEmailAndPassword({
-    required String email, required String password
-  }) async {
+  Future<User?> login({required String email, required String password}) async {
     final userCredential =  await _firebaseAuth.signInWithCredential(
       EmailAuthProvider.credential(email: email, password: password),
     );
@@ -49,5 +36,5 @@ class AuthService implements AuthBase {
   }
 
   @override
-  Future<void> signOut() async => await _firebaseAuth.signOut();
+  Future<void> logout() async => await _firebaseAuth.signOut();
 }

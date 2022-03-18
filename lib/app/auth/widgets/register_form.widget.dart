@@ -100,7 +100,7 @@ class RegisterForm extends StatelessWidget {
           TranslucentButton(
             size: Size(size.width * 0.8, 44),
             title: "Register",
-            onTap: () => onTapSubmit,
+            onTap: onTapSubmit,
             margin: EdgeInsets.only(
                 left: size.width * .05,
                 right: size.width * .05,

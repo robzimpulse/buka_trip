@@ -42,7 +42,10 @@ class TranslucentButton extends StatelessWidget {
         splashColor: Colors.grey,
         highlightColor: Colors.transparent,
         onTap: disabled ? null : _onTap,
-        child: TranslucentTextLabel(title)
+        child: TranslucentTextLabel(
+          title,
+          titleColor: disabled ? Colors.grey : null,
+        )
       ),
     );
   }

@@ -31,6 +31,7 @@ class _AuthScreen extends State<AuthScreen> {
     emailController.addListener(_updateButtonDisability);
     passwordController.addListener(_updateButtonDisability);
     passwordConfirmController.addListener(_updateButtonDisability);
+    _updateButtonDisability();
     super.initState();
   }
 

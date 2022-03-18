@@ -3,6 +3,7 @@ import 'package:buka_trip/infrastructure/index.dart';
 
 class ForgetPasswordForm extends StatelessWidget {
 
+  final TextEditingController? emailController;
   final Size size;
   final VoidCallback? onTapRegister;
   final VoidCallback? onTapLogin;
@@ -13,7 +14,8 @@ class ForgetPasswordForm extends StatelessWidget {
     required this.size,
     this.onTapRegister,
     this.onTapLogin,
-    this.onTapSubmit
+    this.onTapSubmit,
+    this.emailController
   }) : super(key: key);
 
   @override
@@ -33,6 +35,7 @@ class ForgetPasswordForm extends StatelessWidget {
           ),
           TranslucentTextField(
             hintText: "Email",
+            controller: emailController,
             icon: Icons.email_outlined,
             size: Size(size.width * 0.8, 44),
             margin: EdgeInsets.only(
@@ -56,9 +59,7 @@ class ForgetPasswordForm extends StatelessWidget {
           TranslucentButton(
             size: Size(size.width * 0.8, 44),
             title: "Submit",
-            onTap: () => {
-              Log.debug("on tap submit")
-            },
+            onTap: onTapSubmit,
             margin: EdgeInsets.only(
                 left: size.width * .05,
                 right: size.width * .05,

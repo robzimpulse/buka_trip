@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:buka_trip/infrastructure/index.dart';
 
 import 'widgets/index.dart';
 
@@ -13,6 +14,11 @@ class _AuthScreen extends State<AuthScreen> {
   bool _isRegisterScreen = false;
   bool _isForgetPasswordScreen = false;
   bool _isLoading = false;
+
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordConfirmController = TextEditingController();
 
   @override
   void initState() {
@@ -46,20 +52,27 @@ class _AuthScreen extends State<AuthScreen> {
   }
 
   void onTapSubmitRegisterForm() {
-
+    setState(() { _isLoading = true; });
+    Log.debug("register with ${emailController.text} | ${passwordController.text}");
   }
 
   void onTapSubmitLoginForm() {
-
+    setState(() { _isLoading = true; });
+    Log.debug("login with ${emailController.text} | ${passwordController.text}");
   }
 
   void onTapSubmitForgetPasswordForm() {
-
+    setState(() { _isLoading = true; });
+    Log.debug("forget password with ${emailController.text}");
   }
 
   Widget form(Size size) {
     if (_isRegisterScreen) {
       return RegisterForm(
+        usernameController: usernameController,
+        emailController: emailController,
+        passwordController: passwordController,
+        passwordConfirmController: passwordConfirmController,
         size: size,
         onTapLogin: onTapLogin,
         onTapForgetPassword: onTapForgetPassword,
@@ -69,6 +82,7 @@ class _AuthScreen extends State<AuthScreen> {
 
     if (_isForgetPasswordScreen) {
       return ForgetPasswordForm(
+        emailController: emailController,
         size: size,
         onTapLogin: onTapLogin,
         onTapRegister: onTapRegister,
@@ -77,6 +91,8 @@ class _AuthScreen extends State<AuthScreen> {
     }
 
     return LoginForm(
+      emailController: emailController,
+      passwordController: passwordController,
       size: size,
       onTapRegister: onTapRegister,
       onTapForgetPassword: onTapForgetPassword,

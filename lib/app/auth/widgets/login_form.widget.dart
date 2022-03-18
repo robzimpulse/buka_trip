@@ -3,6 +3,9 @@ import 'package:buka_trip/infrastructure/index.dart';
 
 class LoginForm extends StatelessWidget {
 
+  final TextEditingController? emailController;
+  final TextEditingController? passwordController;
+
   final Size size;
   final VoidCallback? onTapRegister;
   final VoidCallback? onTapForgetPassword;
@@ -13,7 +16,9 @@ class LoginForm extends StatelessWidget {
     required this.size,
     this.onTapRegister,
     this.onTapForgetPassword,
-    this.onTapSubmit
+    this.onTapSubmit,
+    this.emailController,
+    this.passwordController
   }) : super(key: key);
 
   @override
@@ -33,6 +38,7 @@ class LoginForm extends StatelessWidget {
           ),
           TranslucentTextField(
             hintText: "Email",
+            controller: emailController,
             icon: Icons.email_outlined,
             size: Size(size.width * 0.8, 44),
             margin: EdgeInsets.only(
@@ -43,6 +49,7 @@ class LoginForm extends StatelessWidget {
           ),
           TranslucentTextField(
             hintText: "Password",
+            controller: passwordController,
             icon: Icons.lock_outline,
             size: Size(size.width * 0.8, 44),
             obscureText: true,

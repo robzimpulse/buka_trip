@@ -3,6 +3,10 @@ import 'package:buka_trip/infrastructure/index.dart';
 
 class RegisterForm extends StatelessWidget {
 
+  final TextEditingController? usernameController;
+  final TextEditingController? emailController;
+  final TextEditingController? passwordController;
+  final TextEditingController? passwordConfirmController;
   final Size size;
   final VoidCallback? onTapLogin;
   final VoidCallback? onTapForgetPassword;
@@ -13,7 +17,11 @@ class RegisterForm extends StatelessWidget {
     required this.size,
     this.onTapLogin,
     this.onTapForgetPassword,
-    this.onTapSubmit
+    this.onTapSubmit,
+    this.usernameController,
+    this.emailController,
+    this.passwordController,
+    this.passwordConfirmController
   }) : super(key: key);
 
   @override
@@ -33,6 +41,7 @@ class RegisterForm extends StatelessWidget {
           ),
           TranslucentTextField(
             hintText: "Username",
+            controller: usernameController,
             icon: Icons.account_circle_outlined,
             size: Size(size.width * 0.8, 44),
             margin: EdgeInsets.only(
@@ -43,6 +52,7 @@ class RegisterForm extends StatelessWidget {
           ),
           TranslucentTextField(
             hintText: "Email",
+            controller: emailController,
             icon: Icons.email_outlined,
             size: Size(size.width * 0.8, 44),
             margin: EdgeInsets.only(
@@ -53,6 +63,7 @@ class RegisterForm extends StatelessWidget {
           ),
           TranslucentTextField(
             hintText: "Password",
+            controller: passwordController,
             icon: Icons.lock_outline,
             size: Size(size.width * 0.8, 44),
             obscureText: true,
@@ -64,6 +75,7 @@ class RegisterForm extends StatelessWidget {
           ),
           TranslucentTextField(
             hintText: "Confirm Password",
+            controller: passwordConfirmController,
             icon: Icons.lock_outline,
             size: Size(size.width * 0.8, 44),
             obscureText: true,

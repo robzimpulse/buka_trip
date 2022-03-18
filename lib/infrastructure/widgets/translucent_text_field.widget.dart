@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TranslucentTextField extends StatelessWidget {
 
-  final Size size;
+  final Size? size;
   final bool obscureText;
   final TextInputType keyboardType;
   final IconData? icon;
@@ -14,7 +14,7 @@ class TranslucentTextField extends StatelessWidget {
 
   const TranslucentTextField({
     Key? key,
-    required this.size,
+    this.size,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.next,
@@ -28,8 +28,8 @@ class TranslucentTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: size.width,
-        height: size.height,
+        width: size?.width,
+        height: size?.height,
         alignment: Alignment.center,
         padding: padding,
         margin: margin,

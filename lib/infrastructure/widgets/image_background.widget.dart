@@ -16,10 +16,7 @@ class ImageBackground extends StatelessWidget {
     return SizedBox(
       height: size?.height,
       width: size?.width,
-      child: Image.asset(
-        assetPath,
-        fit: BoxFit.fill,
-      )
+      child: Image.asset(assetPath, fit: BoxFit.fill)
     );
   }
 }

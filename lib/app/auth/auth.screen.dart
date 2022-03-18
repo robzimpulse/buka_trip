@@ -109,7 +109,7 @@ class _AuthScreen extends State<AuthScreen> {
     try {
       setState(() { _isLoading = true; });
       String email = emailController.text;
-      String password = passwordConfirmController.text;
+      String password = passwordController.text;
       final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.login(email: email, password: password);
     } on FirebaseAuthException catch (e) {

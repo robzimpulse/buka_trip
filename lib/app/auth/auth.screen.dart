@@ -85,7 +85,11 @@ class _AuthScreen extends State<AuthScreen> {
         child: SizedBox(
           height: size.height,
           child: Center(
-            child: form(size),
+            child: Visibility(
+              visible: _isLoading,
+              replacement: form(size),
+              child: const CircularProgressIndicator(color: Colors.grey)
+            ),
           ),
         ),
       ),

@@ -1,5 +1,3 @@
-export 'translucent_card.widget.dart';
-export 'translucent_text_field.widget.dart';
-export 'image_background.widget.dart';
-export 'translucent_text_label.widget.dart';
-export 'translucent_multiple_button_horizontal.widget.dart';
+export 'login_form.widget.dart';
+export 'register_form.widget.dart';
+export 'forget_password_form.widget.dart';

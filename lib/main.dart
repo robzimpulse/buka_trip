@@ -6,7 +6,7 @@ import 'app/index.dart';
 void main() {
   runApp(
     const MaterialApp(
-      title: 'Translucent Login UI',
+      title: 'Buka Trip',
       debugShowCheckedModeBanner: false,
       home: SignInScreen(),
     ),

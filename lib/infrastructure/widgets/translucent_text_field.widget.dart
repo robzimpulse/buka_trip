@@ -8,15 +8,19 @@ class TranslucentTextField extends StatelessWidget {
   final IconData? icon;
   final String? hintText;
   final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? margin;
+  final TextInputAction textInputAction;
 
   const TranslucentTextField({
     Key? key,
     required this.size,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
+    this.textInputAction = TextInputAction.next,
     this.icon,
     this.hintText,
-    this.padding
+    this.padding,
+    this.margin
   }) : super(key: key);
 
   @override
@@ -26,6 +30,7 @@ class TranslucentTextField extends StatelessWidget {
         height: size.height,
         alignment: Alignment.center,
         padding: padding,
+        margin: margin,
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(.1),
           borderRadius: BorderRadius.circular(20),
@@ -34,6 +39,7 @@ class TranslucentTextField extends StatelessWidget {
           style: TextStyle(color: Colors.white.withOpacity(.9)),
           obscureText: obscureText,
           keyboardType: keyboardType,
+          textInputAction: textInputAction,
           decoration: InputDecoration(
             prefixIcon: Icon(icon, color: Colors.white.withOpacity(.8)),
             border: InputBorder.none,

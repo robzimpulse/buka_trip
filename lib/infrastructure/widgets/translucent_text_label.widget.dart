@@ -8,9 +8,8 @@ class TranslucentTextLabel extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final Decoration? decoration;
 
-  const TranslucentTextLabel({
+  const TranslucentTextLabel(this.title, {
     Key? key,
-    required this.title,
     this.margin,
     this.padding,
     this.size,

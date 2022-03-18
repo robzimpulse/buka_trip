@@ -8,6 +8,8 @@ class TranslucentMultipleButtonHorizontal extends StatelessWidget {
   final String? rightText;
   final VoidCallback? onTapLeftText;
   final VoidCallback? onTapRightText;
+  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
 
   const TranslucentMultipleButtonHorizontal({
     Key? key,
@@ -15,11 +17,15 @@ class TranslucentMultipleButtonHorizontal extends StatelessWidget {
     this.rightText,
     this.onTapLeftText,
     this.onTapRightText,
+    this.margin,
+    this.padding,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      margin: margin,
+      padding: padding,
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

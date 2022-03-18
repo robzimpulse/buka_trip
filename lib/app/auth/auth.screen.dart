@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import '../../infrastructure/index.dart';
 import 'widgets/index.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -14,73 +13,43 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreen extends State<AuthScreen> {
-
-  Duration duration = const Duration(seconds: 5);
-  Timer? _timer;
-  List<String> backgrounds = [
-    'assets/images/sunset_background_image.jpeg',
-    'assets/images/beach_background_image.jpeg'
-  ];
-  String background = "";
-  final _random = Random();
-  bool isRegisterScreen = false;
-  bool isForgetPasswordScreen = false;
-  bool isLoading = false;
-
-  void changeBackground() {
-    String newbg = backgrounds.elementAt(_random.nextInt(backgrounds.length));
-    if (background != newbg) {
-      setState(() { background = newbg; });
-      Log.debug("changed background to $background");
-    }
-  }
-
-  void startTimer() {
-    if (_timer != null) {
-      _timer?.cancel();
-      _timer = null;
-    } else {
-      changeBackground();
-      _timer = Timer.periodic(duration, (timer) { changeBackground(); });
-    }
-  }
+  bool _isRegisterScreen = false;
+  bool _isForgetPasswordScreen = false;
+  bool _isLoading = false;
 
   @override
   void initState() {
-    startTimer();
     super.initState();
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
-    _timer = null;
     super.dispose();
   }
 
   void onTapRegister() {
     setState(() {
-      isRegisterScreen = true;
-      isForgetPasswordScreen = false;
+      _isRegisterScreen = true;
+      _isForgetPasswordScreen = false;
     });
   }
 
   void onTapLogin() {
     setState(() {
-      isRegisterScreen = false;
-      isForgetPasswordScreen = false;
+      _isRegisterScreen = false;
+      _isForgetPasswordScreen = false;
     });
   }
 
   void onTapForgetPassword() {
     setState(() {
-      isRegisterScreen = false;
-      isForgetPasswordScreen = true;
+      _isRegisterScreen = false;
+      _isForgetPasswordScreen = true;
     });
   }
 
   Widget form(Size size) {
-    if (isRegisterScreen) {
+    if (_isRegisterScreen) {
       return RegisterForm(
         size: size,
         onTapLogin: onTapLogin,
@@ -89,7 +58,7 @@ class _AuthScreen extends State<AuthScreen> {
       );
     }
 
-    if (isForgetPasswordScreen) {
+    if (_isForgetPasswordScreen) {
       return ForgetPasswordForm(
         size: size,
         onTapLogin: onTapLogin,

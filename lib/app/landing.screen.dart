@@ -24,7 +24,7 @@ class LandingScreen extends StatelessWidget {
             return AuthScreen();
           }
           Log.debug("testing active 2");
-          return AuthScreen();
+          return SplashScreen();
         });
   }
 }

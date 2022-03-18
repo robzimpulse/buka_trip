@@ -85,9 +85,10 @@ class _AuthScreen extends State<AuthScreen> {
       String username = usernameController.text;
       String email = emailController.text;
       String password = passwordController.text;
-      String passwordConfirm = passwordConfirmController.text;
       final auth = Provider.of<AuthBase>(context, listen: false);
-      await auth.register(email: email, password: password);
+      User? user = await auth.register(email: email, password: password);
+      user?.updateDisplayName(username);
+      user?.reload();
     } on FirebaseAuthException catch (e) {
       DialogPresenter.alert(context, title: "Error", content: "${e.message}");
     } catch (e) {
@@ -114,7 +115,18 @@ class _AuthScreen extends State<AuthScreen> {
   }
 
   Future<void> onTapSubmitForgetPassword() async {
-
+    try {
+      setState(() { _isLoading = true; });
+      String email = emailController.text;
+      final auth = Provider.of<AuthBase>(context, listen: false);
+      await auth.resetPassword(email: email);
+    } on FirebaseAuthException catch (e) {
+      DialogPresenter.alert(context, title: "Error", content: "${e.message}");
+    } catch (e) {
+      Log.debug("onTapSubmitForgetPassword ${e.toString()}");
+    } finally {
+      setState(() { _isLoading = false; });
+    }
   }
 
   Widget form(Size size) {

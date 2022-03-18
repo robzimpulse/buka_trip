@@ -55,7 +55,7 @@ class ForgetPasswordForm extends StatelessWidget {
           ),
           TranslucentButton(
             size: Size(size.width * 0.8, 44),
-            title: "Send Password to My Email",
+            title: "Submit",
             onTap: () => {
               Log.debug("on tap submit")
             },

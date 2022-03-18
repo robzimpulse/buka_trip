@@ -37,7 +37,7 @@ class TranslucentMultipleButtonHorizontal extends StatelessWidget {
             RichText(
               text: TextSpan(
                 text: leftText,
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white, fontSize: 12),
                 recognizer: TapGestureRecognizer()..onTap = () {
                     HapticFeedback.lightImpact();
                     onTapLeftText!();
@@ -47,7 +47,7 @@ class TranslucentMultipleButtonHorizontal extends StatelessWidget {
             RichText(
               text: TextSpan(
                 text: rightText,
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white, fontSize: 12),
                 recognizer: TapGestureRecognizer()..onTap = () {
                     HapticFeedback.lightImpact();
                     onTapRightText!();

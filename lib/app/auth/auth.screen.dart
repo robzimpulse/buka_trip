@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:buka_trip/infrastructure/index.dart';
 
+import '../../infrastructure/index.dart';
 import 'widgets/index.dart';
 
 class AuthScreen extends StatefulWidget {

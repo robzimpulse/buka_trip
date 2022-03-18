@@ -1,15 +1,17 @@
+import 'package:buka_trip/app/screens/explore.screen.dart';
+import 'package:buka_trip/app/screens/inbox.screen.dart';
+import 'package:buka_trip/app/screens/profile.screen.dart';
+import 'package:buka_trip/app/screens/trips.widget.dart';
 import 'package:flutter/material.dart';
 
-import 'widgets/index.dart';
-
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class RootScreen extends StatefulWidget {
+  const RootScreen({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _HomeScreen();
+  State<StatefulWidget> createState() => _RootScreen();
 }
 
-class _HomeScreen extends State<HomeScreen> {
+class _RootScreen extends State<RootScreen> {
 
   int _selectedIndex = 0;
 
@@ -37,10 +39,10 @@ class _HomeScreen extends State<HomeScreen> {
   ];
 
   final List<Widget> _bodies = const [
-    ExploreWidget(),
-    TripsWidget(),
-    InboxWidget(),
-    ProfileWidget()
+    ExploreScreen(),
+    TripsScreen(),
+    InboxScreen(),
+    ProfileScreen()
   ];
 
   @override

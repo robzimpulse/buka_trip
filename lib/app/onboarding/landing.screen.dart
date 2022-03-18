@@ -1,9 +1,10 @@
-import 'package:buka_trip/app/index.dart';
+import 'package:buka_trip/app/auth/auth.screen.dart';
+import 'package:buka_trip/app/onboarding/splash.screen.dart';
+import 'package:buka_trip/app/screens/root.screen.dart';
+import 'package:buka_trip/infrastructure/service/auth.service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-
-import '../../infrastructure/index.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class LandingScreen extends StatelessWidget {
             if (user == null) {
               return const AuthScreen();
             }
-            return const HomeScreen();
+            return const RootScreen();
           }
           return const SplashScreen();
         });

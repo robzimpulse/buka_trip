@@ -1,9 +1,12 @@
+import 'package:buka_trip/app/auth/widgets/forget_password_form.widget.dart';
+import 'package:buka_trip/app/auth/widgets/login_form.widget.dart';
+import 'package:buka_trip/app/auth/widgets/register_form.widget.dart';
+import 'package:buka_trip/infrastructure/service/auth.service.dart';
+import 'package:buka_trip/infrastructure/util/dialog_presenter.dart';
+import 'package:buka_trip/infrastructure/util/log.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:buka_trip/infrastructure/index.dart';
 import 'package:provider/provider.dart';
-
-import 'widgets/index.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:buka_trip/infrastructure/widgets/blur_filter.widget.dart';
 import 'package:flutter/material.dart';
-import '../../../infrastructure/index.dart';
 
 class Logo extends StatefulWidget {
   const Logo({Key? key}) : super(key: key);

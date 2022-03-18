@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class InboxWidget extends StatelessWidget {
-  const InboxWidget({Key? key}) : super(key: key);
+class InboxScreen extends StatelessWidget {
+  const InboxScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,5 @@
+import 'package:buka_trip/app/onboarding/widgets/logo.widget.dart';
 import 'package:flutter/material.dart';
-
-import 'widgets/index.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);

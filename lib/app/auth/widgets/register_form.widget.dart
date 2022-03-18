@@ -1,5 +1,8 @@
+import 'package:buka_trip/infrastructure/widgets/translucent_button.widget.dart';
+import 'package:buka_trip/infrastructure/widgets/translucent_multiple_button_horizontal.widget.dart';
+import 'package:buka_trip/infrastructure/widgets/translucent_text_field.widget.dart';
+import 'package:buka_trip/infrastructure/widgets/translucent_text_label.widget.dart';
 import 'package:flutter/material.dart';
-import 'package:buka_trip/infrastructure/index.dart';
 
 class RegisterForm extends StatelessWidget {
 

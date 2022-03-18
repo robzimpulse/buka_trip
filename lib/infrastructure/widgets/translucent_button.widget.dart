@@ -1,7 +1,6 @@
+import 'package:buka_trip/infrastructure/widgets/translucent_text_label.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'index.dart';
 
 class TranslucentButton extends StatelessWidget {
 

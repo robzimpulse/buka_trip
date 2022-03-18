@@ -16,11 +16,14 @@ class ImageBackground extends StatelessWidget {
     return SizedBox(
       height: size?.height,
       width: size?.width,
-      child: Image.asset(
-        assetPath,
-        fit: BoxFit.fill,
-      ),
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 300),
+        child: Image.asset(
+          assetPath,
+          key: UniqueKey(),
+          fit: BoxFit.fill,
+        ),
+      )
     );
   }
-
 }

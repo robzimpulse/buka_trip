@@ -4,10 +4,16 @@ import 'package:buka_trip/infrastructure/index.dart';
 class ForgetPasswordForm extends StatelessWidget {
 
   final Size size;
+  final VoidCallback? onTapRegister;
+  final VoidCallback? onTapLogin;
+  final VoidCallback? onTapSubmit;
 
   const ForgetPasswordForm({
     Key? key,
-    required this.size
+    required this.size,
+    this.onTapRegister,
+    this.onTapLogin,
+    this.onTapSubmit
   }) : super(key: key);
 
   @override
@@ -35,8 +41,19 @@ class ForgetPasswordForm extends StatelessWidget {
                 bottom: size.height * .01
             ),
           ),
+          TranslucentMultipleButtonHorizontal(
+            leftText: "Create a new Account",
+            onTapLeftText: onTapRegister,
+            rightText: "Already Have an Account?",
+            onTapRightText: onTapLogin,
+            margin: EdgeInsets.only(
+                left: size.width * .05,
+                right: size.width * .05,
+                bottom: size.height * .01
+            ),
+          ),
           TranslucentButton(
-            title: "Login",
+            title: "Send Password to My Email",
             onTap: () => {
               Log.debug("on tap submit")
             },

@@ -4,10 +4,16 @@ import 'package:buka_trip/infrastructure/index.dart';
 class LoginForm extends StatelessWidget {
 
   final Size size;
+  final VoidCallback? onTapRegister;
+  final VoidCallback? onTapForgetPassword;
+  final VoidCallback? onTapSubmit;
 
   const LoginForm({
     Key? key,
-    required this.size
+    required this.size,
+    this.onTapRegister,
+    this.onTapForgetPassword,
+    this.onTapSubmit
   }) : super(key: key);
 
   @override
@@ -48,13 +54,9 @@ class LoginForm extends StatelessWidget {
           ),
           TranslucentMultipleButtonHorizontal(
             leftText: "Forgot Password",
-            onTapLeftText: () => {
-              Log.debug("on tap left")
-            },
+            onTapLeftText: onTapForgetPassword,
             rightText: "Create a new Account",
-            onTapRightText: () => {
-              Log.debug("on tap right")
-            },
+            onTapRightText: onTapRegister,
             margin: EdgeInsets.only(
                 left: size.width * .05,
                 right: size.width * .05,
@@ -63,9 +65,7 @@ class LoginForm extends StatelessWidget {
           ),
           TranslucentButton(
             title: "Login",
-            onTap: () => {
-              Log.debug("on tap submit")
-            },
+            onTap: onTapSubmit,
             margin: EdgeInsets.only(
                 left: size.width * .05,
                 right: size.width * .05,

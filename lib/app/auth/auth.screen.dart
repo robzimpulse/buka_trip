@@ -23,8 +23,8 @@ class _AuthScreen extends State<AuthScreen> {
   ];
   String background = "";
   final _random = Random();
-  bool isRegisterScreen = true;
-  bool isForgetPassword = false;
+  bool isRegisterScreen = false;
+  bool isForgetPasswordScreen = false;
   bool isLoading = false;
 
   void changeBackground() {
@@ -58,6 +58,54 @@ class _AuthScreen extends State<AuthScreen> {
     super.dispose();
   }
 
+  void onTapRegister() {
+    setState(() {
+      isRegisterScreen = true;
+      isForgetPasswordScreen = false;
+    });
+  }
+
+  void onTapLogin() {
+    setState(() {
+      isRegisterScreen = false;
+      isForgetPasswordScreen = false;
+    });
+  }
+
+  void onTapForgetPassword() {
+    setState(() {
+      isRegisterScreen = false;
+      isForgetPasswordScreen = true;
+    });
+  }
+
+  Widget form(Size size) {
+    if (isRegisterScreen) {
+      return RegisterForm(
+        size: size,
+        onTapLogin: onTapLogin,
+        onTapForgetPassword: onTapForgetPassword,
+        onTapSubmit: () => { },
+      );
+    }
+
+    if (isForgetPasswordScreen) {
+      return ForgetPasswordForm(
+        size: size,
+        onTapLogin: onTapLogin,
+        onTapRegister: onTapRegister,
+        onTapSubmit: () => {  },
+      );
+    }
+
+    return LoginForm(
+      size: size,
+      onTapRegister: onTapRegister,
+      onTapForgetPassword: onTapForgetPassword,
+      onTapSubmit: () => { },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -68,15 +116,7 @@ class _AuthScreen extends State<AuthScreen> {
         child: SizedBox(
           height: size.height,
           child: Center(
-            child: Visibility(
-              visible: isRegisterScreen,
-              replacement: Visibility(
-                visible: isForgetPassword,
-                replacement: LoginForm(size: size),
-                child: ForgetPasswordForm(size: size),
-              ),
-              child: RegisterForm(size: size)
-            ),
+            child: form(size),
           ),
         ),
       ),

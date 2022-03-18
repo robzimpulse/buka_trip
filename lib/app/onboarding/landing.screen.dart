@@ -21,7 +21,7 @@ class LandingScreen extends StatelessWidget {
             }
             return const HomeScreen();
           }
-          return const Logo();
+          return const SplashScreen();
         });
   }
 }

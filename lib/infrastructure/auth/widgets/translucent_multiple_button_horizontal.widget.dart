@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 
 class TranslucentMultipleButtonHorizontal extends StatelessWidget {
 
-  final Size? size;
   final String? leftText;
   final String? rightText;
   final VoidCallback? onTapLeftText;
@@ -16,14 +15,11 @@ class TranslucentMultipleButtonHorizontal extends StatelessWidget {
     this.rightText,
     this.onTapLeftText,
     this.onTapRightText,
-    this.size
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: size?.height,
-      width: size?.width,
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

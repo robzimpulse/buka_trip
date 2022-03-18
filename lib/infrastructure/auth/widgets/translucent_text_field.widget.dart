@@ -7,6 +7,7 @@ class TranslucentTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final IconData? icon;
   final String? hintText;
+  final EdgeInsetsGeometry? padding;
 
   const TranslucentTextField({
     Key? key,
@@ -14,7 +15,8 @@ class TranslucentTextField extends StatelessWidget {
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
     this.icon,
-    this.hintText
+    this.hintText,
+    this.padding
   }) : super(key: key);
 
   @override
@@ -23,7 +25,7 @@ class TranslucentTextField extends StatelessWidget {
         width: size.width,
         height: size.height,
         alignment: Alignment.center,
-        padding: EdgeInsets.only(right: size.width / 30),
+        padding: padding,
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(.1),
           borderRadius: BorderRadius.circular(20),

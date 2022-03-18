@@ -1,18 +1,19 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:buka_trip/infrastructure/auth/index.dart';
-import 'package:buka_trip/infrastructure/util/index.dart';
 import 'package:flutter/material.dart';
+import 'package:buka_trip/infrastructure/index.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+import 'widgets/index.dart';
+
+class AuthScreen extends StatefulWidget {
+  const AuthScreen({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _SignInScreen();
+  State<StatefulWidget> createState() => _AuthScreen();
 }
 
-class _SignInScreen extends State<SignInScreen> {
+class _AuthScreen extends State<AuthScreen> {
 
   Duration duration = const Duration(seconds: 5);
   Timer? _timer;
@@ -22,7 +23,8 @@ class _SignInScreen extends State<SignInScreen> {
   ];
   String background = "";
   final _random = Random();
-  bool isRegisterScreen = false;
+  bool isRegisterScreen = true;
+  bool isForgetPassword = false;
   bool isLoading = false;
 
   void changeBackground() {
@@ -68,9 +70,12 @@ class _SignInScreen extends State<SignInScreen> {
           child: Center(
             child: Visibility(
               visible: isRegisterScreen,
-              replacement: LoginForm(size: size),
+              replacement: Visibility(
+                visible: isForgetPassword,
+                replacement: LoginForm(size: size),
+                child: ForgetPasswordForm(size: size),
+              ),
               child: RegisterForm(size: size)
-                // child:
             ),
           ),
         ),

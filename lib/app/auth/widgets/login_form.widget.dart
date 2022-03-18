@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:buka_trip/infrastructure/index.dart';
 
-import '../../util/index.dart';
-import '../../widgets/index.dart';
-
-class RegisterForm extends StatelessWidget {
+class LoginForm extends StatelessWidget {
 
   final Size size;
 
-  const RegisterForm({
+  const LoginForm({
     Key? key,
     required this.size
   }) : super(key: key);
@@ -28,16 +26,6 @@ class RegisterForm extends StatelessWidget {
             ),
           ),
           TranslucentTextField(
-            hintText: "Username",
-            icon: Icons.account_circle_outlined,
-            size: Size(size.width * 0.8, 44),
-            margin: EdgeInsets.only(
-                left: size.width * .05,
-                right: size.width * .05,
-                bottom: size.height * .01
-            ),
-          ),
-          TranslucentTextField(
             hintText: "Email",
             icon: Icons.email_outlined,
             size: Size(size.width * 0.8, 44),
@@ -49,17 +37,6 @@ class RegisterForm extends StatelessWidget {
           ),
           TranslucentTextField(
             hintText: "Password",
-            icon: Icons.lock_outline,
-            size: Size(size.width * 0.8, 44),
-            obscureText: true,
-            margin: EdgeInsets.only(
-                left: size.width * .05,
-                right: size.width * .05,
-                bottom: size.height * .01
-            ),
-          ),
-          TranslucentTextField(
-            hintText: "Confirm Password",
             icon: Icons.lock_outline,
             size: Size(size.width * 0.8, 44),
             obscureText: true,
@@ -85,7 +62,7 @@ class RegisterForm extends StatelessWidget {
             ),
           ),
           TranslucentButton(
-            title: "Register",
+            title: "Login",
             onTap: () => {
               Log.debug("on tap submit")
             },
@@ -100,5 +77,4 @@ class RegisterForm extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-
-import 'infrastructure/index.dart';
-import 'app/index.dart';
+import 'package:buka_trip/app/auth/auth.screen.dart';
 
 void main() {
   runApp(
     const MaterialApp(
       title: 'Buka Trip',
       debugShowCheckedModeBanner: false,
-      home: SignInScreen(),
+      home: AuthScreen(),
     ),
   );
 }

@@ -51,6 +51,18 @@ class RegisterForm extends StatelessWidget {
             hintText: "Password",
             icon: Icons.lock_outline,
             size: Size(size.width * 0.8, 44),
+            obscureText: true,
+            margin: EdgeInsets.only(
+                left: size.width * .05,
+                right: size.width * .05,
+                bottom: size.height * .01
+            ),
+          ),
+          TranslucentTextField(
+            hintText: "Confirm Password",
+            icon: Icons.lock_outline,
+            size: Size(size.width * 0.8, 44),
+            obscureText: true,
             margin: EdgeInsets.only(
                 left: size.width * .05,
                 right: size.width * .05,

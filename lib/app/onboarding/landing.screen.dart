@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
-import '../infrastructure/index.dart';
+import '../../infrastructure/index.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({Key? key}) : super(key: key);
@@ -15,16 +15,13 @@ class LandingScreen extends StatelessWidget {
         stream: auth.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
-            // final User user = snapshot.data;
-            // if (user == null) {
-            //   return LoginPage();
-            // }
-            // return MyFlurryHomePage();
-            Log.debug("testing active");
-            return AuthScreen();
+            final User? user = snapshot.data;
+            if (user == null) {
+              return const AuthScreen();
+            }
+            return const HomeScreen();
           }
-          Log.debug("testing active 2");
-          return SplashScreen();
+          return const Logo();
         });
   }
 }

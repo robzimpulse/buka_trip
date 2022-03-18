@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 
 class TranslucentCard extends StatelessWidget {
 
-  final Size? size;
+  final double? width;
+  final double? height;
   final Widget? child;
 
   const TranslucentCard({
     Key? key,
-    this.size,
     this.child,
+    this.width,
+    this.height,
   }) : super(key: key);
 
   @override
@@ -20,7 +22,8 @@ class TranslucentCard extends StatelessWidget {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaY: 25, sigmaX: 25),
         child: SizedBox(
-          width: size?.width,
+          width: width,
+          height: height,
           child: child,
         ),
       ),

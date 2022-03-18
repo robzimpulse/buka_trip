@@ -2,22 +2,19 @@ import 'package:flutter/material.dart';
 
 class TranslucentTextLabel extends StatelessWidget {
 
-  final Size size;
   final String title;
+  final EdgeInsetsGeometry? padding;
 
   const TranslucentTextLabel({
     Key? key,
-    required this.size,
-    required this.title
+    required this.title,
+    this.padding
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: size.width * .15,
-        bottom: size.width * .1,
-      ),
+    return Container(
+      padding: padding,
       child: Text(
         title,
         style: TextStyle(

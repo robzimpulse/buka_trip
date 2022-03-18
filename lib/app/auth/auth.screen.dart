@@ -58,6 +58,14 @@ class _AuthScreen extends State<AuthScreen> {
     });
   }
 
+  void reset() {
+    setState(() {
+      _isRegisterScreen = false;
+      _isForgetPasswordScreen = false;
+      _isLoading = false;
+    });
+  }
+
   void onTapRegister() {
     setState(() {
       _isRegisterScreen = true;
@@ -91,10 +99,9 @@ class _AuthScreen extends State<AuthScreen> {
       user?.reload();
     } on FirebaseAuthException catch (e) {
       DialogPresenter.alert(context, title: "Error", content: "${e.message}");
+      setState(() { _isLoading = false; });
     } catch (e) {
       Log.debug("onTapSubmitRegisterForm ${e.toString()}");
-    } finally {
-      setState(() { _isLoading = false; });
     }
   }
 
@@ -107,10 +114,9 @@ class _AuthScreen extends State<AuthScreen> {
       await auth.login(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       DialogPresenter.alert(context, title: "Error", content: "${e.message}");
+      setState(() { _isLoading = false; });
     } catch (e) {
       Log.debug("onTapSubmitLoginForm ${e.toString()}");
-    } finally {
-      setState(() { _isLoading = false; });
     }
   }
 
@@ -121,11 +127,15 @@ class _AuthScreen extends State<AuthScreen> {
       final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.resetPassword(email: email);
     } on FirebaseAuthException catch (e) {
-      DialogPresenter.alert(context, title: "Error", content: "${e.message}");
+      Log.debug("onTapSubmitForgetPassword ${e.message}");
     } catch (e) {
       Log.debug("onTapSubmitForgetPassword ${e.toString()}");
     } finally {
-      setState(() { _isLoading = false; });
+      DialogPresenter.alert(
+        context,
+        title: "Success",
+        content: "Success resetting your password, please check your email"
+      ).then((_) => reset());
     }
   }
 

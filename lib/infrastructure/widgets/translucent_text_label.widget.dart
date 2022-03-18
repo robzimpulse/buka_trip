@@ -28,7 +28,7 @@ class TranslucentTextLabel extends StatelessWidget {
       child: Text(
         title,
         style: TextStyle(
-          fontSize: 25,
+          fontSize: 24,
           fontWeight: FontWeight.w600,
           color: Colors.white.withOpacity(.8),
         ),

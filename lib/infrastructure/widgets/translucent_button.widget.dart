@@ -33,14 +33,13 @@ class TranslucentButton extends StatelessWidget {
       margin: margin,
       padding: padding,
       color: color,
+      width: size?.width,
+      height: size?.height,
       child: InkWell(
         splashColor: Colors.grey,
         highlightColor: Colors.transparent,
         onTap: _onTap,
-        child: TranslucentTextLabel(
-          title,
-          size: size,
-        ),
+        child: TranslucentTextLabel(title)
       ),
     );
   }

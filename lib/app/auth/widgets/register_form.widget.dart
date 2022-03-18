@@ -74,6 +74,7 @@ class RegisterForm extends StatelessWidget {
             ),
           ),
           TranslucentMultipleButtonHorizontal(
+            size: Size(size.width * 0.8, 44),
             leftText: "Forgot Password",
             onTapLeftText: onTapForgetPassword,
             rightText: "Already Have an Account?",
@@ -85,6 +86,7 @@ class RegisterForm extends StatelessWidget {
             ),
           ),
           TranslucentButton(
+            size: Size(size.width * 0.8, 44),
             title: "Register",
             onTap: () => onTapSubmit,
             margin: EdgeInsets.only(

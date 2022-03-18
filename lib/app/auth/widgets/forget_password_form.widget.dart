@@ -42,6 +42,7 @@ class ForgetPasswordForm extends StatelessWidget {
             ),
           ),
           TranslucentMultipleButtonHorizontal(
+            size: Size(size.width * 0.8, 44),
             leftText: "Create a new Account",
             onTapLeftText: onTapRegister,
             rightText: "Already Have an Account?",
@@ -53,6 +54,7 @@ class ForgetPasswordForm extends StatelessWidget {
             ),
           ),
           TranslucentButton(
+            size: Size(size.width * 0.8, 44),
             title: "Send Password to My Email",
             onTap: () => {
               Log.debug("on tap submit")

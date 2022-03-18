@@ -53,6 +53,7 @@ class LoginForm extends StatelessWidget {
             ),
           ),
           TranslucentMultipleButtonHorizontal(
+            size: Size(size.width * 0.8, 44),
             leftText: "Forgot Password",
             onTapLeftText: onTapForgetPassword,
             rightText: "Create a new Account",
@@ -64,6 +65,7 @@ class LoginForm extends StatelessWidget {
             ),
           ),
           TranslucentButton(
+            size: Size(size.width * 0.8, 44),
             title: "Login",
             onTap: onTapSubmit,
             margin: EdgeInsets.only(

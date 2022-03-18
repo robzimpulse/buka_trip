@@ -48,13 +48,25 @@ class _AuthScreen extends State<AuthScreen> {
     });
   }
 
+  void onTapSubmitRegisterForm() {
+
+  }
+
+  void onTapSubmitLoginForm() {
+
+  }
+
+  void onTapSubmitForgetPasswordForm() {
+
+  }
+
   Widget form(Size size) {
     if (_isRegisterScreen) {
       return RegisterForm(
         size: size,
         onTapLogin: onTapLogin,
         onTapForgetPassword: onTapForgetPassword,
-        onTapSubmit: () => { },
+        onTapSubmit: onTapSubmitRegisterForm,
       );
     }
 
@@ -63,7 +75,7 @@ class _AuthScreen extends State<AuthScreen> {
         size: size,
         onTapLogin: onTapLogin,
         onTapRegister: onTapRegister,
-        onTapSubmit: () => {  },
+        onTapSubmit: onTapSubmitForgetPasswordForm,
       );
     }
 
@@ -71,7 +83,7 @@ class _AuthScreen extends State<AuthScreen> {
       size: size,
       onTapRegister: onTapRegister,
       onTapForgetPassword: onTapForgetPassword,
-      onTapSubmit: () => { },
+      onTapSubmit: onTapSubmitLoginForm,
     );
   }
 

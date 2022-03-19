@@ -1,5 +1,6 @@
 import 'package:buka_trip/infrastructure/models/trip.model.dart';
 import 'package:buka_trip/infrastructure/providers/index.dart';
+import 'package:buka_trip/infrastructure/utils/log.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TripService implements TripProvider {
@@ -22,7 +23,9 @@ class TripService implements TripProvider {
 
   @override
   Future<void> insert({required Trip trip}) async {
-    await _root.add(trip);
+    DocumentReference<Trip> ref = await _root.add(trip);
+    trip.id = ref.id;
+    ref.update(trip.toJson());
   }
 
   @override

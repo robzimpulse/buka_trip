@@ -54,5 +54,4 @@ class TranslucentButton extends StatelessWidget {
       ),
     );
   }
-
 }

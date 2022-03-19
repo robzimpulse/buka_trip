@@ -43,6 +43,7 @@ dependencies:
 
   # A wrapper around InheritedWidget to make them easier to use and more reusable.
   provider: ^6.0.2
+  email_validator: ^2.0.1
 
 dev_dependencies:
   flutter_test:

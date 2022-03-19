@@ -1,3 +1,5 @@
+import 'package:email_validator/email_validator.dart';
+
 class Validator {
   static String? name(String? name) {
     if (name == null) { return null; }
@@ -8,8 +10,7 @@ class Validator {
   static String? email(String? email) {
     if (email == null) { return null; }
     if (email.isEmpty) { return 'Email can\'t be empty'; }
-    RegExp emailRegExp = RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
-    if (!emailRegExp.hasMatch(email)) { return 'Enter a correct email'; }
+    if (!EmailValidator.validate(email)) { return 'Enter a correct email'; }
     return null;
   }
 

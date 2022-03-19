@@ -7,11 +7,11 @@ class TranslucentTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final IconData? icon;
   final String? hintText;
-  final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
   final TextInputAction textInputAction;
   final TextEditingController? controller;
   final bool enabled;
+  final FormFieldValidator<String>? validator;
 
   const TranslucentTextField({
     Key? key,
@@ -21,10 +21,10 @@ class TranslucentTextField extends StatelessWidget {
     this.textInputAction = TextInputAction.next,
     this.icon,
     this.hintText,
-    this.padding,
     this.margin,
     this.controller,
-    this.enabled = true
+    this.enabled = true,
+    this.validator
   }) : super(key: key);
 
   @override
@@ -33,13 +33,14 @@ class TranslucentTextField extends StatelessWidget {
         width: size?.width,
         height: size?.height,
         alignment: Alignment.center,
-        padding: padding,
         margin: margin,
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(.1),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: TextField(
+        child: TextFormField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: validator,
           enabled: enabled,
           controller: controller,
           style: TextStyle(color: Colors.white.withOpacity(.9)),
@@ -59,5 +60,4 @@ class TranslucentTextField extends StatelessWidget {
         )
     );
   }
-
 }

@@ -26,7 +26,10 @@ class _ProfileScreen extends State<StatefulWidget> {
 
   void _onTapSave() async {
     try {
-      setState(() { _isLoading = true; });
+      setState(() {
+        _isLoading = true;
+        _isUpdate = false;
+      });
       String username = _usernameController.text;
       String email = _emailController.text;
       String password = _passwordController.text;
@@ -37,6 +40,7 @@ class _ProfileScreen extends State<StatefulWidget> {
       await user?.reload();
     } on FirebaseAuthException catch (e) {
       Modal.alert(context, title: 'Error', content: '${e.message}');
+      setState(() { _isUpdate = true; });
     } catch (e) {
       Log.debug('_onTapSave ${e.toString()}');
     } finally {

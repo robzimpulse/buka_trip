@@ -1,2 +1,2 @@
 export 'auth.provider.dart';
-export 'theme.provider.dart';
+export 'trip.provider.dart';

@@ -23,6 +23,7 @@ class LandingScreen extends StatelessWidget {
             return const RootScreen();
           }
           return const SplashScreen();
-        });
+        }
+    );
   }
 }

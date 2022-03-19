@@ -6,12 +6,6 @@ import 'package:flutter/material.dart';
 
 class ForgetPasswordForm extends StatelessWidget {
 
-  final TextEditingController? emailController;
-  final Size size;
-  final VoidCallback? onTapRegister;
-  final VoidCallback? onTapLogin;
-  final VoidCallback? onTapSubmit;
-
   const ForgetPasswordForm({
     Key? key,
     required this.size,
@@ -21,15 +15,21 @@ class ForgetPasswordForm extends StatelessWidget {
     this.emailController
   }) : super(key: key);
 
+  final TextEditingController? emailController;
+  final Size size;
+  final VoidCallback? onTapRegister;
+  final VoidCallback? onTapLogin;
+  final VoidCallback? onTapSubmit;
+
   @override
   Widget build(BuildContext context) {
     return Card(
       color: Colors.transparent,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: <Widget>[
           TranslucentTextLabel(
-            "Buka Trip",
+            'Buka Trip',
             size: Size(size.width * 0.9, 44),
             margin: EdgeInsets.only(
                 top: size.height * .02,
@@ -37,7 +37,7 @@ class ForgetPasswordForm extends StatelessWidget {
             ),
           ),
           TranslucentTextField(
-            hintText: "Email",
+            hintText: 'Email',
             controller: emailController,
             icon: Icons.email_outlined,
             size: Size(size.width * 0.8, 44),
@@ -49,9 +49,9 @@ class ForgetPasswordForm extends StatelessWidget {
           ),
           TranslucentMultipleButtonHorizontal(
             size: Size(size.width * 0.8, 44),
-            leftText: "Create a new Account",
+            leftText: 'Create a new Account',
             onTapLeftText: onTapRegister,
-            rightText: "Already Have an Account?",
+            rightText: 'Already Have an Account?',
             onTapRightText: onTapLogin,
             margin: EdgeInsets.only(
                 left: size.width * .05,
@@ -62,7 +62,7 @@ class ForgetPasswordForm extends StatelessWidget {
           TranslucentButton(
             size: Size(size.width * 0.8, 44),
             disabled: onTapSubmit == null,
-            title: "Submit",
+            title: 'Submit',
             onTap: onTapSubmit,
             margin: EdgeInsets.only(
                 left: size.width * .05,

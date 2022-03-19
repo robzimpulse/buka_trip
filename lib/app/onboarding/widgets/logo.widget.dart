@@ -15,8 +15,8 @@ class _LogoState extends State<Logo>
     with SingleTickerProviderStateMixin {
   late AnimationController _flipController;
 
-  late Animation animation;
-  late Animation flipAnimation;
+  late Animation<double> animation;
+  late Animation<double> flipAnimation;
   late Timer timer;
 
   @override
@@ -26,7 +26,7 @@ class _LogoState extends State<Logo>
         vsync: this,
         duration: const Duration(milliseconds: 6000)
     );
-    flipAnimation = Tween(begin: 0.0, end: 1.0).animate(_flipController);
+    flipAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(_flipController);
     timer = Timer(
         const Duration(milliseconds: 500), () => _flipController.repeat()
     );
@@ -41,8 +41,8 @@ class _LogoState extends State<Logo>
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    var width = (size.height > 600) ? size.height * 0.14 : size.height * 0.11;
+    Size size = MediaQuery.of(context).size;
+    double width = (size.height > 600) ? size.height * 0.14 : size.height * 0.11;
     return Container(
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
@@ -51,7 +51,7 @@ class _LogoState extends State<Logo>
       ),
       child: AnimatedBuilder(
         animation: flipAnimation,
-        builder: (context, child) => Transform(
+        builder: (BuildContext context, Widget? child) => Transform(
           alignment: Alignment.center,
           transform: Matrix4.identity()
             ..setEntry(3, 2, 0.001)

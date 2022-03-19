@@ -11,10 +11,10 @@ class LandingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final auth = Provider.of<AuthProvider>(context, listen: false);
+    final AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
     return StreamBuilder<User?>(
         stream: auth.authStateChanges(),
-        builder: (context, snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
             final User? user = snapshot.data;
             if (user == null) {

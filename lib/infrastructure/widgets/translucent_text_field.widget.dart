@@ -2,17 +2,6 @@ import 'package:flutter/material.dart';
 
 class TranslucentTextField extends StatelessWidget {
 
-  final Size? size;
-  final bool obscureText;
-  final TextInputType keyboardType;
-  final IconData? icon;
-  final String? hintText;
-  final EdgeInsetsGeometry? margin;
-  final TextInputAction textInputAction;
-  final TextEditingController? controller;
-  final bool enabled;
-  final FormFieldValidator<String>? validator;
-
   const TranslucentTextField({
     Key? key,
     this.size,
@@ -26,6 +15,17 @@ class TranslucentTextField extends StatelessWidget {
     this.enabled = true,
     this.validator
   }) : super(key: key);
+
+  final Size? size;
+  final bool obscureText;
+  final TextInputType keyboardType;
+  final IconData? icon;
+  final String? hintText;
+  final EdgeInsetsGeometry? margin;
+  final TextInputAction textInputAction;
+  final TextEditingController? controller;
+  final bool enabled;
+  final FormFieldValidator<String>? validator;
 
   @override
   Widget build(BuildContext context) {

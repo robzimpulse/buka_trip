@@ -6,14 +6,6 @@ import 'package:flutter/material.dart';
 
 class LoginForm extends StatelessWidget {
 
-  final TextEditingController? emailController;
-  final TextEditingController? passwordController;
-
-  final Size size;
-  final VoidCallback? onTapRegister;
-  final VoidCallback? onTapForgetPassword;
-  final VoidCallback? onTapSubmit;
-
   const LoginForm({
     Key? key,
     required this.size,
@@ -24,15 +16,22 @@ class LoginForm extends StatelessWidget {
     this.passwordController
   }) : super(key: key);
 
+  final TextEditingController? emailController;
+  final TextEditingController? passwordController;
+  final Size size;
+  final VoidCallback? onTapRegister;
+  final VoidCallback? onTapForgetPassword;
+  final VoidCallback? onTapSubmit;
+
   @override
   Widget build(BuildContext context) {
     return Card(
       color: Colors.transparent,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: <Widget>[
           TranslucentTextLabel(
-            "Buka Trip",
+            'Buka Trip',
             size: Size(size.width * 0.9, 44),
             margin: EdgeInsets.only(
                 top: size.height * .02,
@@ -40,7 +39,7 @@ class LoginForm extends StatelessWidget {
             ),
           ),
           TranslucentTextField(
-            hintText: "Email",
+            hintText: 'Email',
             controller: emailController,
             icon: Icons.email_outlined,
             size: Size(size.width * 0.8, 44),
@@ -51,7 +50,7 @@ class LoginForm extends StatelessWidget {
             ),
           ),
           TranslucentTextField(
-            hintText: "Password",
+            hintText: 'Password',
             controller: passwordController,
             icon: Icons.lock_outline,
             size: Size(size.width * 0.8, 44),
@@ -64,9 +63,9 @@ class LoginForm extends StatelessWidget {
           ),
           TranslucentMultipleButtonHorizontal(
             size: Size(size.width * 0.8, 44),
-            leftText: "Forgot Password",
+            leftText: 'Forgot Password',
             onTapLeftText: onTapForgetPassword,
-            rightText: "Create a new Account",
+            rightText: 'Create a new Account',
             onTapRightText: onTapRegister,
             margin: EdgeInsets.only(
                 left: size.width * .05,
@@ -77,7 +76,7 @@ class LoginForm extends StatelessWidget {
           TranslucentButton(
             size: Size(size.width * 0.8, 44),
             disabled: onTapSubmit == null,
-            title: "Login",
+            title: 'Login',
             onTap: onTapSubmit,
             margin: EdgeInsets.only(
                 left: size.width * .05,

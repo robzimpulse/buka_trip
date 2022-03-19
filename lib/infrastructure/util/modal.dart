@@ -15,7 +15,7 @@ class Modal {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text("Dismiss"),
+              child: const Text('Dismiss'),
               onPressed: () => Navigator.of(context).pop(),
             )
           ],

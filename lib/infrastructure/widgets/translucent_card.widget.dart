@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 
 class TranslucentCard extends StatelessWidget {
 
-  final double? width;
-  final double? height;
-  final Widget? child;
-
   const TranslucentCard({
     Key? key,
     this.child,
     this.width,
     this.height,
   }) : super(key: key);
+
+  final double? width;
+  final double? height;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {

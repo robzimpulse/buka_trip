@@ -14,13 +14,18 @@ Future<void> main() async {
   runApp(const BukaTripApp());
 }
 
-class BukaTripApp extends StatelessWidget {
+class BukaTripApp extends StatefulWidget {
   const BukaTripApp({Key? key}) : super(key: key);
 
   @override
+  State<BukaTripApp> createState() => _BukaTripAppState();
+}
+
+class _BukaTripAppState extends State<BukaTripApp> {
+  @override
   Widget build(BuildContext context) {
     return Provider<AuthProvider>(
-      create: (context) => AuthService(),
+      create: (BuildContext context) => AuthService(),
       child: const MaterialApp(
         title: 'Buka Trip',
         debugShowCheckedModeBanner: false,
@@ -28,5 +33,4 @@ class BukaTripApp extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -36,9 +36,9 @@ class _ProfileScreen extends State<StatefulWidget> {
       if (password.isNotEmpty) { await user?.updatePassword(password); }
       await user?.reload();
     } on FirebaseAuthException catch (e) {
-      Modal.alert(context, title: "Error", content: "${e.message}");
+      Modal.alert(context, title: 'Error', content: '${e.message}');
     } catch (e) {
-      Log.debug("_onTapSave ${e.toString()}");
+      Log.debug('_onTapSave ${e.toString()}');
     } finally {
       setState(() { _isLoading = false; });
       _onTapCancel();
@@ -47,8 +47,8 @@ class _ProfileScreen extends State<StatefulWidget> {
 
   void fetchData() async {
     User? user = _auth.currentUser;
-    _usernameController.text = user?.displayName ?? "";
-    _emailController.text = user?.email ?? "";
+    _usernameController.text = user?.displayName ?? '';
+    _emailController.text = user?.email ?? '';
     _passwordController.clear();
   }
 
@@ -82,7 +82,7 @@ class _ProfileScreen extends State<StatefulWidget> {
     return Scaffold(
       backgroundColor: Colors.green,
       body: ListView(
-        children: [
+        children: <Widget>[
           SizedBox(height: size.width * .2),
           CircleAvatar(
             backgroundColor: Colors.transparent,
@@ -95,7 +95,7 @@ class _ProfileScreen extends State<StatefulWidget> {
             ),
           ),
           TranslucentTextField(
-            hintText: "Username",
+            hintText: 'Username',
             enabled: _isUpdate,
             controller: _usernameController,
             icon: Icons.account_circle_outlined,
@@ -107,7 +107,7 @@ class _ProfileScreen extends State<StatefulWidget> {
             ),
           ),
           TranslucentTextField(
-            hintText: "Email",
+            hintText: 'Email',
             enabled: _isUpdate,
             controller: _emailController,
             icon: Icons.email_outlined,
@@ -118,7 +118,7 @@ class _ProfileScreen extends State<StatefulWidget> {
             ),
           ),
           TranslucentTextField(
-            hintText: "Password",
+            hintText: 'Password',
             enabled: _isUpdate,
             controller: _passwordController,
             icon: Icons.lock_outline,
@@ -146,9 +146,9 @@ class _ProfileScreen extends State<StatefulWidget> {
             ),
             child: TranslucentMultipleButtonHorizontal(
               size: Size(size.width * 0.8, 44),
-              leftText: _isUpdate ? "Cancel" : null,
+              leftText: _isUpdate ? 'Cancel' : null,
               onTapLeftText: _isUpdate ? _onTapCancel : null,
-              rightText: !_isUpdate ? "Edit" : "Save",
+              rightText: !_isUpdate ? 'Edit' : 'Save',
               onTapRightText: !_isUpdate ? _onTapEdit : _onTapSave,
               margin: EdgeInsets.only(
                   left: size.width * .3,

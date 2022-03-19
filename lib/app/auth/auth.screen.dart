@@ -96,15 +96,15 @@ class _AuthScreen extends State<AuthScreen> {
       String username = _usernameController.text;
       String email = _emailController.text;
       String password = _passwordController.text;
-      final auth = Provider.of<AuthProvider>(context, listen: false);
+      final AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
       User? user = await auth.register(email: email, password: password);
       user?.updateDisplayName(username);
       user?.reload();
     } on FirebaseAuthException catch (e) {
-      Modal.alert(context, title: "Error", content: "${e.message}");
+      Modal.alert(context, title: 'Error', content: '${e.message}');
       setState(() { _isLoading = false; });
     } catch (e) {
-      Log.debug("onTapSubmitRegisterForm ${e.toString()}");
+      Log.debug('onTapSubmitRegisterForm ${e.toString()}');
     }
   }
 
@@ -113,13 +113,13 @@ class _AuthScreen extends State<AuthScreen> {
       setState(() { _isLoading = true; });
       String email = _emailController.text;
       String password = _passwordController.text;
-      final auth = Provider.of<AuthProvider>(context, listen: false);
+      final AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
       await auth.login(email: email, password: password);
     } on FirebaseAuthException catch (e) {
-      Modal.alert(context, title: "Error", content: "${e.message}");
+      Modal.alert(context, title: 'Error', content: '${e.message}');
       setState(() { _isLoading = false; });
     } catch (e) {
-      Log.debug("onTapSubmitLoginForm ${e.toString()}");
+      Log.debug('onTapSubmitLoginForm ${e.toString()}');
     }
   }
 
@@ -127,17 +127,17 @@ class _AuthScreen extends State<AuthScreen> {
     try {
       setState(() { _isLoading = true; });
       String email = _emailController.text;
-      final auth = Provider.of<AuthProvider>(context, listen: false);
+      final AuthProvider auth = Provider.of<AuthProvider>(context, listen: false);
       await auth.resetPassword(email: email);
     } on FirebaseAuthException catch (e) {
-      Log.debug("onTapSubmitForgetPassword ${e.message}");
+      Log.debug('onTapSubmitForgetPassword ${e.message}');
     } catch (e) {
-      Log.debug("onTapSubmitForgetPassword ${e.toString()}");
+      Log.debug('onTapSubmitForgetPassword ${e.toString()}');
     } finally {
       Modal.alert(
         context,
-        title: "Success",
-        content: "Success resetting your password, please check your email"
+        title: 'Success',
+        content: 'Success resetting your password, please check your email'
       ).then((_) => _reset());
     }
   }

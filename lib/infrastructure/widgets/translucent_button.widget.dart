@@ -1,17 +1,8 @@
-import 'package:buka_trip/infrastructure/util/extension/let.dart';
 import 'package:buka_trip/infrastructure/widgets/translucent_text_label.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class TranslucentButton extends StatelessWidget {
-
-  final String title;
-  final VoidCallback? onTap;
-  final Size? size;
-  final EdgeInsetsGeometry? margin;
-  final EdgeInsetsGeometry? padding;
-  final Color? color;
-  final bool disabled;
 
   const TranslucentButton({
     Key? key,
@@ -23,6 +14,14 @@ class TranslucentButton extends StatelessWidget {
     this.color,
     this.disabled = false
   }) : super(key: key);
+
+  final String title;
+  final VoidCallback? onTap;
+  final Size? size;
+  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
+  final Color? color;
+  final bool disabled;
 
   void _onTap() {
     HapticFeedback.lightImpact();

@@ -15,7 +15,7 @@ class _RootScreen extends State<RootScreen> {
 
   int _selectedIndex = 0;
 
-  final List<BottomNavigationBarItem> _items = const [
+  final List<BottomNavigationBarItem> _items = const <BottomNavigationBarItem>[
     BottomNavigationBarItem(
       icon: Icon(Icons.location_city_outlined),
       activeIcon: Icon(Icons.location_city),
@@ -38,7 +38,7 @@ class _RootScreen extends State<RootScreen> {
     )
   ];
 
-  final List<Widget> _bodies = const [
+  final List<Widget> _bodies = const <Widget>[
     ExploreScreen(),
     TripsScreen(),
     InboxScreen(),
@@ -55,7 +55,7 @@ class _RootScreen extends State<RootScreen> {
         unselectedItemColor: Colors.grey,
         items: _items,
         currentIndex: _selectedIndex,
-        onTap: (index) => setState(() { _selectedIndex = index; }),
+        onTap: (int index) => setState(() { _selectedIndex = index; }),
       ),
       body: Center(child: _bodies[_selectedIndex]),
     );

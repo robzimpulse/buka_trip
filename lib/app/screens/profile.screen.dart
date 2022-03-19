@@ -1,12 +1,111 @@
+import 'package:buka_trip/infrastructure/util/constant.dart';
+import 'package:buka_trip/infrastructure/widgets/translucent_button.widget.dart';
+import 'package:buka_trip/infrastructure/widgets/translucent_text_field.widget.dart';
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
+  State<StatefulWidget> createState() => _ProfileScreen();
+
+}
+
+class _ProfileScreen extends State<StatefulWidget> {
+
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  bool _isUpdate = false;
+
+  void _onTapSubmit() {
+    setState(() { _isUpdate = !_isUpdate; });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
       backgroundColor: Colors.green,
+      body: ListView(
+        children: [
+          SizedBox(height: size.width * .2),
+          CircleAvatar(
+            backgroundColor: Colors.transparent,
+            maxRadius: 50,
+            child: ClipOval(
+              child: Image.network(
+                  Constant.placeholder(width: 100, height: 100),
+                  width: 100
+              ),
+            ),
+          ),
+          TranslucentTextField(
+            hintText: "Username",
+            enabled: _isUpdate,
+            controller: _usernameController,
+            icon: Icons.account_circle_outlined,
+            size: Size(size.width * 0.8, 44),
+            margin: EdgeInsets.only(
+              top: size.width * .1,
+                left: size.width * .05,
+                right: size.width * .05,
+                bottom: size.height * .01,
+            ),
+          ),
+          TranslucentTextField(
+            hintText: "Email",
+            enabled: _isUpdate,
+            controller: _emailController,
+            icon: Icons.email_outlined,
+            size: Size(size.width * 0.8, 44),
+            margin: EdgeInsets.only(
+                left: size.width * .05,
+                right: size.width * .05,
+                bottom: size.height * .01
+            ),
+          ),
+          TranslucentTextField(
+            hintText: "Password",
+            enabled: _isUpdate,
+            controller: _passwordController,
+            icon: Icons.lock_outline,
+            size: Size(size.width * 0.8, 44),
+            obscureText: true,
+            margin: EdgeInsets.only(
+                left: size.width * .05,
+                right: size.width * .05,
+                bottom: size.height * .01
+            ),
+          ),
+          TranslucentButton(
+            size: Size(size.width * 0.8, 44),
+            // disabled: onTapSubmit == null,
+            title: !_isUpdate ? "Update" : "Submit",
+            onTap: _onTapSubmit,
+            margin: EdgeInsets.only(
+                left: size.width * .05,
+                right: size.width * .05,
+                top: size.height * .02,
+                bottom: size.height * .02
+            ),
+          )
+        ],
+      ),
     );
   }
 

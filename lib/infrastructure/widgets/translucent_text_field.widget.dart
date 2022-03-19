@@ -11,6 +11,7 @@ class TranslucentTextField extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
   final TextInputAction textInputAction;
   final TextEditingController? controller;
+  final bool enabled;
 
   const TranslucentTextField({
     Key? key,
@@ -22,7 +23,8 @@ class TranslucentTextField extends StatelessWidget {
     this.hintText,
     this.padding,
     this.margin,
-    this.controller
+    this.controller,
+    this.enabled = true
   }) : super(key: key);
 
   @override
@@ -38,6 +40,7 @@ class TranslucentTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: TextField(
+          enabled: enabled,
           controller: controller,
           style: TextStyle(color: Colors.white.withOpacity(.9)),
           obscureText: obscureText,

@@ -1,3 +1,4 @@
+import 'package:buka_trip/infrastructure/util/let.dart';
 import 'package:buka_trip/infrastructure/widgets/translucent_text_label.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,7 +37,12 @@ class TranslucentButton extends StatelessWidget {
       color: color,
       width: size?.width,
       height: size?.height,
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(.1),
+        borderRadius: size?.height.let((x) => BorderRadius.circular(x/2))
+      ),
       child: InkWell(
+        borderRadius: size?.height.let((x) => BorderRadius.circular(x/2)),
         splashFactory: disabled ? NoSplash.splashFactory : null,
         splashColor: Colors.grey,
         highlightColor: Colors.transparent,

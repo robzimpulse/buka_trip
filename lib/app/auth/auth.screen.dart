@@ -23,45 +23,45 @@ class _AuthScreen extends State<AuthScreen> {
   bool _isRegisterButtonDisabled = false;
   bool _isForgetPasswordButtonDisabled = false;
 
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController passwordConfirmController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordConfirmController = TextEditingController();
 
   @override
   void initState() {
-    usernameController.addListener(_updateButtonDisability);
-    emailController.addListener(_updateButtonDisability);
-    passwordController.addListener(_updateButtonDisability);
-    passwordConfirmController.addListener(_updateButtonDisability);
+    _usernameController.addListener(_updateButtonDisability);
+    _emailController.addListener(_updateButtonDisability);
+    _passwordController.addListener(_updateButtonDisability);
+    _passwordConfirmController.addListener(_updateButtonDisability);
     _updateButtonDisability();
     super.initState();
   }
 
   @override
   void dispose() {
-    usernameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    passwordConfirmController.dispose();
+    _usernameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _passwordConfirmController.dispose();
     super.dispose();
   }
 
   void _updateButtonDisability() {
     setState(() {
-      _isLoginButtonDisabled = emailController.text.isEmpty == true ||
-          passwordController.text.isEmpty == true;
+      _isLoginButtonDisabled = _emailController.text.isEmpty == true ||
+          _passwordController.text.isEmpty == true;
 
-      _isRegisterButtonDisabled = usernameController.text.isEmpty == true ||
-          emailController.text.isEmpty == true ||
-          passwordController.text.isEmpty == true ||
-          passwordController.text != passwordConfirmController.text;
+      _isRegisterButtonDisabled = _usernameController.text.isEmpty == true ||
+          _emailController.text.isEmpty == true ||
+          _passwordController.text.isEmpty == true ||
+          _passwordController.text != _passwordConfirmController.text;
 
-      _isForgetPasswordButtonDisabled = emailController.text.isEmpty == true;
+      _isForgetPasswordButtonDisabled = _emailController.text.isEmpty == true;
     });
   }
 
-  void reset() {
+  void _reset() {
     setState(() {
       _isRegisterScreen = false;
       _isForgetPasswordScreen = false;
@@ -69,33 +69,33 @@ class _AuthScreen extends State<AuthScreen> {
     });
   }
 
-  void onTapRegister() {
+  void _onTapRegister() {
     setState(() {
       _isRegisterScreen = true;
       _isForgetPasswordScreen = false;
     });
   }
 
-  void onTapLogin() {
+  void _onTapLogin() {
     setState(() {
       _isRegisterScreen = false;
       _isForgetPasswordScreen = false;
     });
   }
 
-  void onTapForgetPassword() {
+  void _onTapForgetPassword() {
     setState(() {
       _isRegisterScreen = false;
       _isForgetPasswordScreen = true;
     });
   }
 
-  Future<void> onTapSubmitRegister() async {
+  Future<void> _onTapSubmitRegister() async {
     try {
       setState(() { _isLoading = true; });
-      String username = usernameController.text;
-      String email = emailController.text;
-      String password = passwordController.text;
+      String username = _usernameController.text;
+      String email = _emailController.text;
+      String password = _passwordController.text;
       final auth = Provider.of<AuthBase>(context, listen: false);
       User? user = await auth.register(email: email, password: password);
       user?.updateDisplayName(username);
@@ -108,11 +108,11 @@ class _AuthScreen extends State<AuthScreen> {
     }
   }
 
-  Future<void> onTapSubmitLogin() async {
+  Future<void> _onTapSubmitLogin() async {
     try {
       setState(() { _isLoading = true; });
-      String email = emailController.text;
-      String password = passwordController.text;
+      String email = _emailController.text;
+      String password = _passwordController.text;
       final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.login(email: email, password: password);
     } on FirebaseAuthException catch (e) {
@@ -123,10 +123,10 @@ class _AuthScreen extends State<AuthScreen> {
     }
   }
 
-  Future<void> onTapSubmitForgetPassword() async {
+  Future<void> _onTapSubmitForgetPassword() async {
     try {
       setState(() { _isLoading = true; });
-      String email = emailController.text;
+      String email = _emailController.text;
       final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.resetPassword(email: email);
     } on FirebaseAuthException catch (e) {
@@ -138,41 +138,41 @@ class _AuthScreen extends State<AuthScreen> {
         context,
         title: "Success",
         content: "Success resetting your password, please check your email"
-      ).then((_) => reset());
+      ).then((_) => _reset());
     }
   }
 
-  Widget form(Size size) {
+  Widget _form(Size size) {
     if (_isRegisterScreen) {
       return RegisterForm(
-        usernameController: usernameController,
-        emailController: emailController,
-        passwordController: passwordController,
-        passwordConfirmController: passwordConfirmController,
+        usernameController: _usernameController,
+        emailController: _emailController,
+        passwordController: _passwordController,
+        passwordConfirmController: _passwordConfirmController,
         size: size,
-        onTapLogin: onTapLogin,
-        onTapForgetPassword: onTapForgetPassword,
-        onTapSubmit: _isRegisterButtonDisabled ? null : onTapSubmitRegister,
+        onTapLogin: _onTapLogin,
+        onTapForgetPassword: _onTapForgetPassword,
+        onTapSubmit: _isRegisterButtonDisabled ? null : _onTapSubmitRegister,
       );
     }
 
     if (_isForgetPasswordScreen) {
       return ForgetPasswordForm(
-        emailController: emailController,
+        emailController: _emailController,
         size: size,
-        onTapLogin: onTapLogin,
-        onTapRegister: onTapRegister,
-        onTapSubmit: _isForgetPasswordButtonDisabled ? null : onTapSubmitForgetPassword,
+        onTapLogin: _onTapLogin,
+        onTapRegister: _onTapRegister,
+        onTapSubmit: _isForgetPasswordButtonDisabled ? null : _onTapSubmitForgetPassword,
       );
     }
 
     return LoginForm(
-      emailController: emailController,
-      passwordController: passwordController,
+      emailController: _emailController,
+      passwordController: _passwordController,
       size: size,
-      onTapRegister: onTapRegister,
-      onTapForgetPassword: onTapForgetPassword,
-      onTapSubmit: _isLoginButtonDisabled ? null : onTapSubmitLogin,
+      onTapRegister: _onTapRegister,
+      onTapForgetPassword: _onTapForgetPassword,
+      onTapSubmit: _isLoginButtonDisabled ? null : _onTapSubmitLogin,
     );
   }
 
@@ -188,7 +188,7 @@ class _AuthScreen extends State<AuthScreen> {
           child: Center(
             child: Visibility(
               visible: _isLoading,
-              replacement: form(size),
+              replacement: _form(size),
               child: const CircularProgressIndicator(color: Colors.grey)
             ),
           ),

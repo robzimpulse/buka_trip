@@ -1,5 +1,5 @@
 import 'package:buka_trip/app/onboarding/landing.screen.dart';
-import 'package:buka_trip/infrastructure/service/auth.service.dart';
+import 'package:buka_trip/infrastructure/services/auth.service.dart';
 import 'package:buka_trip/infrastructure/providers/index.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

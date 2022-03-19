@@ -1,6 +1,6 @@
-import 'package:buka_trip/infrastructure/util/constant.dart';
-import 'package:buka_trip/infrastructure/util/modal.dart';
-import 'package:buka_trip/infrastructure/util/log.dart';
+import 'package:buka_trip/infrastructure/utils/constant.dart';
+import 'package:buka_trip/infrastructure/utils/modal.dart';
+import 'package:buka_trip/infrastructure/utils/log.dart';
 import 'package:buka_trip/infrastructure/widgets/translucent_multiple_button_horizontal.widget.dart';
 import 'package:buka_trip/infrastructure/widgets/translucent_text_field.widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';

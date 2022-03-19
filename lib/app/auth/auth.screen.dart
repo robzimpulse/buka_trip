@@ -2,7 +2,6 @@ import 'package:buka_trip/app/auth/widgets/forget_password_form.widget.dart';
 import 'package:buka_trip/app/auth/widgets/login_form.widget.dart';
 import 'package:buka_trip/app/auth/widgets/register_form.widget.dart';
 import 'package:buka_trip/infrastructure/providers/index.dart';
-import 'package:buka_trip/infrastructure/service/auth.service.dart';
 import 'package:buka_trip/infrastructure/util/modal.dart';
 import 'package:buka_trip/infrastructure/util/log.dart';
 import 'package:firebase_auth/firebase_auth.dart';

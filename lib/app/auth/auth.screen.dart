@@ -1,6 +1,7 @@
 import 'package:buka_trip/app/auth/widgets/forget_password_form.widget.dart';
 import 'package:buka_trip/app/auth/widgets/login_form.widget.dart';
 import 'package:buka_trip/app/auth/widgets/register_form.widget.dart';
+import 'package:buka_trip/infrastructure/providers/index.dart';
 import 'package:buka_trip/infrastructure/service/auth.service.dart';
 import 'package:buka_trip/infrastructure/util/modal.dart';
 import 'package:buka_trip/infrastructure/util/log.dart';
@@ -96,7 +97,7 @@ class _AuthScreen extends State<AuthScreen> {
       String username = _usernameController.text;
       String email = _emailController.text;
       String password = _passwordController.text;
-      final auth = Provider.of<AuthBase>(context, listen: false);
+      final auth = Provider.of<AuthProvider>(context, listen: false);
       User? user = await auth.register(email: email, password: password);
       user?.updateDisplayName(username);
       user?.reload();
@@ -113,7 +114,7 @@ class _AuthScreen extends State<AuthScreen> {
       setState(() { _isLoading = true; });
       String email = _emailController.text;
       String password = _passwordController.text;
-      final auth = Provider.of<AuthBase>(context, listen: false);
+      final auth = Provider.of<AuthProvider>(context, listen: false);
       await auth.login(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       Modal.alert(context, title: "Error", content: "${e.message}");
@@ -127,7 +128,7 @@ class _AuthScreen extends State<AuthScreen> {
     try {
       setState(() { _isLoading = true; });
       String email = _emailController.text;
-      final auth = Provider.of<AuthBase>(context, listen: false);
+      final auth = Provider.of<AuthProvider>(context, listen: false);
       await auth.resetPassword(email: email);
     } on FirebaseAuthException catch (e) {
       Log.debug("onTapSubmitForgetPassword ${e.message}");

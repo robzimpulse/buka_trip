@@ -1,15 +1,7 @@
+import 'package:buka_trip/infrastructure/providers/auth.provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-abstract class AuthBase {
-  User? get currentUser;
-  Future <void> logout();
-  Stream <User?> authStateChanges();
-  Future <User?> login ({required String email, required String password});
-  Future <User?> register ({required String email, required String password});
-  Future <void> resetPassword({required String email});
-}
-
-class AuthService implements AuthBase {
+class AuthService implements AuthProvider {
 
   final _firebaseAuth = FirebaseAuth.instance;
 

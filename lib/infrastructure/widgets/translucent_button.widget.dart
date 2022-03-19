@@ -39,10 +39,10 @@ class TranslucentButton extends StatelessWidget {
       height: size?.height,
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(.1),
-        borderRadius: size?.height.let((x) => BorderRadius.circular(x/2))
+        borderRadius: BorderRadius.circular(8),
       ),
       child: InkWell(
-        borderRadius: size?.height.let((x) => BorderRadius.circular(x/2)),
+        borderRadius: BorderRadius.circular(8),
         splashFactory: disabled ? NoSplash.splashFactory : null,
         splashColor: Colors.grey,
         highlightColor: Colors.transparent,

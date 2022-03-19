@@ -1,4 +1,5 @@
 import 'package:buka_trip/infrastructure/util/constant.dart';
+import 'package:buka_trip/infrastructure/util/dialog_presenter.dart';
 import 'package:buka_trip/infrastructure/util/log.dart';
 import 'package:buka_trip/infrastructure/util/validator.dart';
 import 'package:buka_trip/infrastructure/widgets/translucent_multiple_button_horizontal.widget.dart';
@@ -22,19 +23,45 @@ class _ProfileScreen extends State<StatefulWidget> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   bool _isUpdate = false;
+  bool _isLoading = false;
 
-  void _submit() {
-    // TODO: update profile
-    Log.debug("submit ${_usernameController.text} | ${_emailController.text} | ${_passwordController.text}");
+  void _onTapSave() async {
+    try {
+      setState(() { _isLoading = true; });
+      String username = _usernameController.text;
+      String email = _emailController.text;
+      String password = _passwordController.text;
+      User? user = _auth.currentUser;
+      if (username.isNotEmpty) { await user?.updateDisplayName(username); }
+      if (email.isNotEmpty) { await user?.updateEmail(email); }
+      if (password.isNotEmpty) { await user?.updatePassword(password); }
+      await user?.reload();
+    } on FirebaseAuthException catch (e) {
+      DialogPresenter.alert(context, title: "Error", content: "${e.message}");
+    } catch (e) {
+      Log.debug("_onTapSave ${e.toString()}");
+    } finally {
+      setState(() { _isLoading = false; });
+      _onTapCancel();
+    }
   }
 
   void fetchData() async {
     User? user = _auth.currentUser;
     _usernameController.text = user?.displayName ?? "";
     _emailController.text = user?.email ?? "";
+    _passwordController.clear();
   }
 
-  void _toggleUpdate() => setState(() { _isUpdate = !_isUpdate; });
+  void _onTapEdit() {
+    setState(() { _isUpdate = true; });
+
+  }
+
+  void _onTapCancel() {
+    setState(() { _isUpdate = false; });
+    fetchData();
+  }
 
   @override
   void initState() {
@@ -73,7 +100,6 @@ class _ProfileScreen extends State<StatefulWidget> {
             enabled: _isUpdate,
             controller: _usernameController,
             icon: Icons.account_circle_outlined,
-            validator: (text) => Validator.name(text),
             margin: EdgeInsets.only(
               top: size.width * .1,
                 left: size.width * .05,
@@ -86,7 +112,6 @@ class _ProfileScreen extends State<StatefulWidget> {
             enabled: _isUpdate,
             controller: _emailController,
             icon: Icons.email_outlined,
-            validator: (text) => Validator.email(text),
             margin: EdgeInsets.only(
                 left: size.width * .05,
                 right: size.width * .05,
@@ -99,26 +124,41 @@ class _ProfileScreen extends State<StatefulWidget> {
             controller: _passwordController,
             icon: Icons.lock_outline,
             obscureText: true,
-            validator: (text) => Validator.password(text),
             margin: EdgeInsets.only(
                 left: size.width * .05,
                 right: size.width * .05,
                 bottom: size.height * .01
             ),
           ),
-          TranslucentMultipleButtonHorizontal(
-            size: Size(size.width * 0.8, 44),
-            leftText: _isUpdate ? "Cancel" : null,
-            onTapLeftText: _isUpdate ? _toggleUpdate : null,
-            rightText: !_isUpdate ? "Update" : "Save",
-            onTapRightText: !_isUpdate ? _toggleUpdate : _submit,
-            margin: EdgeInsets.only(
-                left: size.width * .3,
-                right: size.width * .3,
-                bottom: size.height * .01,
-                top: size.height * .01
+          Visibility(
+            visible: !_isLoading,
+            replacement: Center(
+              child: Container(
+                  width: 32,
+                  height: 32,
+                  child: const CircularProgressIndicator(),
+                  margin: EdgeInsets.only(
+                      left: size.width * .3,
+                      right: size.width * .3,
+                      bottom: size.height * .01,
+                      top: size.height * .01
+                  ),
+              ),
             ),
-          )
+            child: TranslucentMultipleButtonHorizontal(
+              size: Size(size.width * 0.8, 44),
+              leftText: _isUpdate ? "Cancel" : null,
+              onTapLeftText: _isUpdate ? _onTapCancel : null,
+              rightText: !_isUpdate ? "Edit" : "Save",
+              onTapRightText: !_isUpdate ? _onTapEdit : _onTapSave,
+              margin: EdgeInsets.only(
+                  left: size.width * .3,
+                  right: size.width * .3,
+                  bottom: size.height * .01,
+                  top: size.height * .01
+              ),
+            ),
+          ),
         ],
       ),
     );

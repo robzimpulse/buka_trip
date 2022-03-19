@@ -36,7 +36,7 @@ class TranslucentTextField extends StatelessWidget {
         margin: margin,
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(.1),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(8),
         ),
         child: TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,

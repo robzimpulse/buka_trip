@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DialogPresenter {
+class Modal {
   static Future<void> alert(BuildContext context,{
     required String title,
     required String content,

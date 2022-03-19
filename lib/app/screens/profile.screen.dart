@@ -1,5 +1,5 @@
 import 'package:buka_trip/infrastructure/util/constant.dart';
-import 'package:buka_trip/infrastructure/util/dialog_presenter.dart';
+import 'package:buka_trip/infrastructure/util/modal.dart';
 import 'package:buka_trip/infrastructure/util/log.dart';
 import 'package:buka_trip/infrastructure/widgets/translucent_multiple_button_horizontal.widget.dart';
 import 'package:buka_trip/infrastructure/widgets/translucent_text_field.widget.dart';
@@ -36,7 +36,7 @@ class _ProfileScreen extends State<StatefulWidget> {
       if (password.isNotEmpty) { await user?.updatePassword(password); }
       await user?.reload();
     } on FirebaseAuthException catch (e) {
-      DialogPresenter.alert(context, title: "Error", content: "${e.message}");
+      Modal.alert(context, title: "Error", content: "${e.message}");
     } catch (e) {
       Log.debug("_onTapSave ${e.toString()}");
     } finally {

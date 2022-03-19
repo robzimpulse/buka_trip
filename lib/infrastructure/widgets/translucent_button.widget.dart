@@ -1,4 +1,4 @@
-import 'package:buka_trip/infrastructure/util/let.dart';
+import 'package:buka_trip/infrastructure/util/extension/let.dart';
 import 'package:buka_trip/infrastructure/widgets/translucent_text_label.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

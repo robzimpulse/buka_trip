@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:ui';
 
-import 'package:buka_trip/infrastructure/widgets/blur_filter.widget.dart';
 import 'package:flutter/material.dart';
 
 class Logo extends StatefulWidget {
@@ -56,13 +56,15 @@ class _LogoState extends State<Logo>
           transform: Matrix4.identity()
             ..setEntry(3, 2, 0.001)
             ..rotateY(-2 * pi * (flipAnimation.value)),
-          child: BlurFilter(
-            sigma: 5,
+          child: ClipRRect(
             borderRadius: BorderRadius.circular(150),
-            child: CircleAvatar(
-              backgroundColor: Colors.grey.withOpacity(0.4),
-              maxRadius: MediaQuery.of(context).size.width * 0.12,
-              child: Image.asset('assets/icons/app_icon.png', width: width)
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              child: CircleAvatar(
+                  backgroundColor: Colors.grey.withOpacity(0.4),
+                  maxRadius: MediaQuery.of(context).size.width * 0.12,
+                  child: Image.asset('assets/icons/app_icon.png', width: width)
+              ),
             ),
           ),
         ),

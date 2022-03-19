@@ -2,7 +2,7 @@ import 'package:buka_trip/app/auth/widgets/forget_password_form.widget.dart';
 import 'package:buka_trip/app/auth/widgets/login_form.widget.dart';
 import 'package:buka_trip/app/auth/widgets/register_form.widget.dart';
 import 'package:buka_trip/infrastructure/service/auth.service.dart';
-import 'package:buka_trip/infrastructure/util/dialog_presenter.dart';
+import 'package:buka_trip/infrastructure/util/modal.dart';
 import 'package:buka_trip/infrastructure/util/log.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -101,7 +101,7 @@ class _AuthScreen extends State<AuthScreen> {
       user?.updateDisplayName(username);
       user?.reload();
     } on FirebaseAuthException catch (e) {
-      DialogPresenter.alert(context, title: "Error", content: "${e.message}");
+      Modal.alert(context, title: "Error", content: "${e.message}");
       setState(() { _isLoading = false; });
     } catch (e) {
       Log.debug("onTapSubmitRegisterForm ${e.toString()}");
@@ -116,7 +116,7 @@ class _AuthScreen extends State<AuthScreen> {
       final auth = Provider.of<AuthBase>(context, listen: false);
       await auth.login(email: email, password: password);
     } on FirebaseAuthException catch (e) {
-      DialogPresenter.alert(context, title: "Error", content: "${e.message}");
+      Modal.alert(context, title: "Error", content: "${e.message}");
       setState(() { _isLoading = false; });
     } catch (e) {
       Log.debug("onTapSubmitLoginForm ${e.toString()}");
@@ -134,7 +134,7 @@ class _AuthScreen extends State<AuthScreen> {
     } catch (e) {
       Log.debug("onTapSubmitForgetPassword ${e.toString()}");
     } finally {
-      DialogPresenter.alert(
+      Modal.alert(
         context,
         title: "Success",
         content: "Success resetting your password, please check your email"

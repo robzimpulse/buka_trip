@@ -1,6 +1,9 @@
 import 'package:buka_trip/infrastructure/util/constant.dart';
-import 'package:buka_trip/infrastructure/widgets/translucent_button.widget.dart';
+import 'package:buka_trip/infrastructure/util/log.dart';
+import 'package:buka_trip/infrastructure/util/validator.dart';
+import 'package:buka_trip/infrastructure/widgets/translucent_multiple_button_horizontal.widget.dart';
 import 'package:buka_trip/infrastructure/widgets/translucent_text_field.widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -16,15 +19,26 @@ class _ProfileScreen extends State<StatefulWidget> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   bool _isUpdate = false;
 
-  void _onTapSubmit() {
-    setState(() { _isUpdate = !_isUpdate; });
+  void _submit() {
+    // TODO: update profile
+    Log.debug("submit ${_usernameController.text} | ${_emailController.text} | ${_passwordController.text}");
   }
+
+  void fetchData() async {
+    User? user = _auth.currentUser;
+    _usernameController.text = user?.displayName ?? "";
+    _emailController.text = user?.email ?? "";
+  }
+
+  void _toggleUpdate() => setState(() { _isUpdate = !_isUpdate; });
 
   @override
   void initState() {
+    fetchData();
     super.initState();
   }
 
@@ -59,7 +73,7 @@ class _ProfileScreen extends State<StatefulWidget> {
             enabled: _isUpdate,
             controller: _usernameController,
             icon: Icons.account_circle_outlined,
-            size: Size(size.width * 0.8, 44),
+            validator: (text) => Validator.name(text),
             margin: EdgeInsets.only(
               top: size.width * .1,
                 left: size.width * .05,
@@ -72,7 +86,7 @@ class _ProfileScreen extends State<StatefulWidget> {
             enabled: _isUpdate,
             controller: _emailController,
             icon: Icons.email_outlined,
-            size: Size(size.width * 0.8, 44),
+            validator: (text) => Validator.email(text),
             margin: EdgeInsets.only(
                 left: size.width * .05,
                 right: size.width * .05,
@@ -84,24 +98,25 @@ class _ProfileScreen extends State<StatefulWidget> {
             enabled: _isUpdate,
             controller: _passwordController,
             icon: Icons.lock_outline,
-            size: Size(size.width * 0.8, 44),
             obscureText: true,
+            validator: (text) => Validator.password(text),
             margin: EdgeInsets.only(
                 left: size.width * .05,
                 right: size.width * .05,
                 bottom: size.height * .01
             ),
           ),
-          TranslucentButton(
+          TranslucentMultipleButtonHorizontal(
             size: Size(size.width * 0.8, 44),
-            // disabled: onTapSubmit == null,
-            title: !_isUpdate ? "Update" : "Submit",
-            onTap: _onTapSubmit,
+            leftText: _isUpdate ? "Cancel" : null,
+            onTapLeftText: _isUpdate ? _toggleUpdate : null,
+            rightText: !_isUpdate ? "Update" : "Save",
+            onTapRightText: !_isUpdate ? _toggleUpdate : _submit,
             margin: EdgeInsets.only(
-                left: size.width * .05,
-                right: size.width * .05,
-                top: size.height * .02,
-                bottom: size.height * .02
+                left: size.width * .3,
+                right: size.width * .3,
+                bottom: size.height * .01,
+                top: size.height * .01
             ),
           )
         ],

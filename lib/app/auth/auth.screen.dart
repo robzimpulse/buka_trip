@@ -49,15 +49,15 @@ class _AuthScreen extends State<AuthScreen> {
 
   void _updateButtonDisability() {
     setState(() {
-      _isLoginButtonDisabled = _emailController.text.isEmpty == true ||
-          _passwordController.text.isEmpty == true;
+      _isLoginButtonDisabled = _emailController.text.isEmpty ||
+          _passwordController.text.isEmpty;
 
-      _isRegisterButtonDisabled = _usernameController.text.isEmpty == true ||
-          _emailController.text.isEmpty == true ||
-          _passwordController.text.isEmpty == true ||
+      _isRegisterButtonDisabled = _usernameController.text.isEmpty ||
+          _emailController.text.isEmpty ||
+          _passwordController.text.isEmpty ||
           _passwordController.text != _passwordConfirmController.text;
 
-      _isForgetPasswordButtonDisabled = _emailController.text.isEmpty == true;
+      _isForgetPasswordButtonDisabled = _emailController.text.isEmpty;
     });
   }
 

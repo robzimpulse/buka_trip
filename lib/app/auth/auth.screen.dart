@@ -184,7 +184,6 @@ class _AuthScreen extends State<AuthScreen> {
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: SizedBox(
-          height: size.height,
           child: Center(
             child: Visibility(
               visible: _isLoading,

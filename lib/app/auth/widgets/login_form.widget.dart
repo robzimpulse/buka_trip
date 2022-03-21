@@ -82,7 +82,7 @@ class LoginForm extends StatelessWidget {
                 left: size.width * .05,
                 right: size.width * .05,
                 top: size.height * .02,
-                bottom: size.height * .02
+                bottom: size.width * .05
             ),
           )
         ],

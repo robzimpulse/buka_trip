@@ -4,6 +4,7 @@ import 'package:buka_trip/app/auth/widgets/register_form.widget.dart';
 import 'package:buka_trip/infrastructure/providers/index.dart';
 import 'package:buka_trip/infrastructure/utils/modal.dart';
 import 'package:buka_trip/infrastructure/utils/log.dart';
+import 'package:buka_trip/infrastructure/utils/validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -49,15 +50,14 @@ class _AuthScreen extends State<AuthScreen> {
 
   void _updateButtonDisability() {
     setState(() {
-      _isLoginButtonDisabled = _emailController.text.isEmpty ||
-          _passwordController.text.isEmpty;
+      _isForgetPasswordButtonDisabled = Validator.email(_emailController.text) != null;
 
-      _isRegisterButtonDisabled = _usernameController.text.isEmpty ||
-          _emailController.text.isEmpty ||
-          _passwordController.text.isEmpty ||
+      _isLoginButtonDisabled = _isForgetPasswordButtonDisabled ||
+          Validator.password(_passwordController.text) != null;
+
+      _isRegisterButtonDisabled = Validator.name(_usernameController.text) != null ||
+          _isLoginButtonDisabled ||
           _passwordController.text != _passwordConfirmController.text;
-
-      _isForgetPasswordButtonDisabled = _emailController.text.isEmpty;
     });
   }
 
